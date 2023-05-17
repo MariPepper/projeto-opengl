@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="main.js"></script>
+    <script src="circle.js"></script>
+    <script src="square.js"></script>
+    <script src="triangle.js"></script>
+    <script src="other.js"></script>
+    <script src="three.min.js"></script>
+    <script src="https://threejs.org/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/build/three.min.js"></script>
+</head>
+
+<body>
+    <!-- The side menu container -->
+    <div id="side-menu">
+        <ul>
+            <li>
+                <p><label for="x-position">X Posição:</label></p>
+                <p> <span><input type="number" id="x-input" name="x-position" value="0"></span>
+                </p>
+            </li>
+            <li>
+                <p> <label for="y-position">Y Posição:</label>
+                </p>
+                <p> <span><input type="number" id="y-input" name="y-position" value="0"></span>
+                </p>
+            </li>
+            <li>
+                <p><label for="z-position">Velocidade:</label></p>
+                <p> <input type="range" min="-5" max="20" step="0.1" id="z-input" value="0">
+                </p>
+            </li>
+            <li>
+                <p><label for="w-position">Escala:</label></p>
+                <p> <input type="range" min="-5" max="5" step="0.1" id="w-input" value="0">
+                </p>
+            </li>
+            <li>
+                <p><label for="v-position">Zoom:</label></p>
+                <p> <input type="range" min="-5" max="5" step="0.1" id="v-input" value="0">
+                </p>
+            </li>
+            <li>
+                <p> <label for="shapes">Animar: </label></p>
+                <select name="element" id="element" onchange="onSelectChange()">
+                    <option></option>
+                    <option value="circle">Bóia</option>
+                    <option value="sphere">Esfera</option>
+                    <option value="square">Cubo</option>
+                    <option value="triangle">Pirâmide</option>
+                </select>
+            </li>
+            <br>
+            <br>
+            <br>
+            <li>
+                <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/"><img
+                        alt="Creative Commons License" style="border-width:0"
+                        src="https://i.creativecommons.org/l/by-nc/4.0/80x15.png" /></a><br />
+                <h6>This work is licensed
+                    under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" class="disable"
+                        target="_blank">Creative Commons
+                        Attribution-NonCommercial 4.0 International License</a>.</h6>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Your main content goes here -->
+    <h1>Projeto da Mariana</h1>
+    <nav class="main-nav">
+        <div class="container">
+            <div class="menu">
+                <img src="./img/circle.png" alt="" onclick="echoCircle();displayDivTwo();">
+                <img src="./img/square.png" alt="" onclick="echoSquare();displayDivTwo();">
+                <img src="./img/triangle.png" alt="" onclick="echoTriangle();displayDivTwo();">
+                <img src="./img/heart.png" alt="" onclick="templateSquare();displayDivTwo();">
+                <img src="./img/cog.png" alt="" onclick="toggleMenu()">
+                <img src="./img/star.png" alt="" onclick="groupShapes();displayDivTwo();">
+            </div>
+
+            <div class="search-ac">
+                <div class="searchbar">
+                    <img src="./img/Search.png" alt="" onclick="searchPage()">
+                    <input type="text" placeholder="Search Here" id="searchInput" onkeypress="handleKeyPress(event)">
+                </div>
+                <div class="noti-mode">
+                    <img src="./img/mode.png" alt="" onclick="showLeads()">
+                    <img src="./img/bell.png" alt="" onclick="showSteps()">
+                    <img src="./img/account.png" alt="" onclick="showBio()">
+                </div>
+
+            </div>
+        </div>
+    </nav>
+    <div id="one" style="display: block;">
+        <article class="intro">
+            <h1>Apresentação</h1>
+            <article class="the-intro">
+                <h2>Desenhar gráficos - WebGL</h2>
+                <p>
+                    O conteúdo da tela 3D é especificado usando a API WebGL, que é uma API completamente separada da API
+                    da tela 2D, embora ambas sejam renderizadas dentro de um elemento canva. O WebGL é baseado no OpenGL
+                    (Open Graphics Library), e permite que alguém se comunique com
+                    a GPU (Unidade de Processamento Gráfico) de um computador. <br>
+                    Por isso, o WebGL de raíz está mais próximo de linguagens de baixo nível, como C++, do que o
+                    JavaScript regular, é complexo, mas incrivelmente poderoso.
+                </p>
+            </article>
+            <article class="the-intro">
+                <h2>Usando uma biblioteca</h2>
+                <p>
+                    Devido à sua complexidade, a maioria das pessoas escreve código gráfico 3D usando uma biblioteca
+                    JavaScript de terceiros, como Three.js, PlayCanvas ou Babylon.js. A maioria delas funciona de
+                    maneira semelhante, com funcionalidades para criar formas primitivas e personalizadas,
+                    posicionar câmeras e iluminação, cobrir superfícies com texturas e muito mais. As bibliotecas
+                    interagem com o
+                    WebGL, permitindo que alguém trabalhe em um nível superior. <br>
+                    Sim, usar uma delas significa aprender uma nova API (uma de terceiros, neste caso), mas elas são
+                    muito mais simples do que codificar WebGL de raíz.
+                </p>
+            </article>
+            <article class="the-intro">
+                <h2>Three-Dimensional Coordinate Systems aka 3D</h2>
+                <p>
+                    Para localizar um ponto em um plano, são necessários dois números.
+                    Sabemos que qualquer ponto no plano pode ser representado como
+                    um par ordenado (a, b) de números reais, onde a é a
+                    coordenada x e b é a coordenada y.
+                    Por esta razão, um plano é chamado de bidimensional, enquanto que para localizar um ponto no espaço,
+                    três números são necessários.
+                    Representamos qualquer ponto no espaço por um triplo ordenado (a, b, c) de números reais.
+                </p>
+            </article>
+            <article class="the-intro">
+                <h2>O Zoom no Cinema</h2>
+                <p>
+                    Na cinematografia e na filmagem, a relação entre o zoom e a escala/proximidade dos objetos
+                    desempenha um papel crucial na narrativa visual. O zoom se refere ao ajuste da distância focal da
+                    câmera, o que resulta em uma mudança na ampliação da imagem capturada. Quando um zoom é aplicado, os
+                    objetos na cena podem parecer se aproximar ou se afastar, afetando diretamente a percepção do
+                    espectador sobre a distância e tamanho desses objetos.<br>
+                    Ao aplicar um zoom para aproximar um objeto, ele pode parecer crescer em tamanho e ocupar mais
+                    espaço na tela, criando uma sensação de intimidade e importância. Por outro lado, um zoom para
+                    afastar um objeto pode fazer com que ele pareça diminuir de tamanho e se tornar menos proeminente na
+                    composição, transmitindo uma sensação de distanciamento ou insignificância.
+                </p>
+            </article>
+        </article>
+    </div>
+    </div>
+    <div id="two" style="display: none;"><canvas></canvas></div>
+    <div id="three" style="display: none;">
+        <article class="steps">
+            <h1>Passo-a-passo</h1>
+            <article class="one-step">
+                <h2>Criando uma demonstração com Three.js</h2>
+                <p>
+                    <p>Uma cena 3D típica em um jogo - mesmo a mais simples - contém itens padrão como formas
+                        localizadas em
+                        um sistema de coordenadas, uma câmera para visualizá-las, luzes e materiais para torná-las
+                        melhores,
+                        animações para torná-las mais vivas, etc. O Three.js, como qualquer outra biblioteca 3D, fornece
+                        funções auxiliares integradas para ajudar a implementar rapidamente as funcionalidades 3D
+                        comuns.
+                    </p>
+                    <p>Escolhi o Three porque é uma das bibliotecas WebGL mais populares e fáceis de
+                        começar. Não estou tentando dizer que é melhor do que qualquer outra biblioteca WebGL
+                        disponível, como por exemplo, a CopperLicht, GLGE ou PlayCanvas, é apenas uma que escolhi
+                        utilizar.
+                        Aproveito para destacar a importância de um renderizador, uma ferramenta que serve para criar e
+                        exibir imagens gráficas.
+                        <p>Existem alguns
+                            renderizadores diferentes: o WebGL é o padrão e outros que você pode usar são o Canvas, SVG,
+                            CSS
+                            e DOM.
+                        </p>
+                    </p>
+                </p>
+            </article>
+            <article class="one-step">
+                <h2>Problemas a contornar</h2>
+                <p>A transparência é uma característica importante quando se trata de camadas sobrepostas em um website.
+                    No entanto, ao usar elementos como divs e canvas, a transparência pode se tornar um problema se não
+                    for implementada corretamente. Quando a transparência não é aplicada, as camadas inferiores podem
+                    ser completamente cobertas pelas camadas superiores, tornando impossível ver o conteúdo subjacente.
+                </p>
+                <p>Para construir gráficos com OpenGL, é necessário ter conhecimentos básicos de álgebra linear,
+                    trigonometria e geometria analítica. A álgebra linear é importante para trabalhar com matrizes e
+                    vetores, que são usados para representar as transformações que ocorrem na cena 3D. A trigonometria é
+                    importante para trabalhar com funções trigonométricas, como seno, cosseno e tangente, que são usadas
+                    para calcular as posições e orientações dos objetos no espaço. A geometria analítica é útil para
+                    descrever as formas e posições dos objetos usando equações e coordenadas cartesianas.</p>
+                <p>Além disso, é importante ter conhecimentos de cálculo diferencial e integral para trabalhar com
+                    curvas e
+                    superfícies em 3D. Com esses conhecimentos matemáticos, é possível criar gráficos complexos e
+                    realistas com o OpenGL.</p>
+            </article>
+            <article class="one-step">
+                <h2>Porquê objetos em 3D</h2>
+                <p>A frustração que me levou a realizar este projeto foi tentar criar em 3D, um objeto em linguagem C.
+                    O compilador DevC++ não funciona como deveria ao tentar criar uma espiral, inspirada no "donut.c".
+                    O código "donut.c" tém como objetivo renderizar arte ASCII, uma coisa que também queria fazer desde
+                    o início do curso. Por isso, tentei criar em ASCII, um gato a entrar para dentro de uma caixa, uma
+                    caixa de
+                    diálogos, ou texto a correr dentro do monitor de um computador.</p>
+            </article>
+        </article>
+    </div>
+    <div id="four" style="display: none;">
+        <article class="bio">
+            <h1 id="nottitle">A minha pequena autobiografia</h1>
+            <article class="the-bio">
+                <p id="b1">Maio de 2023.</p>
+                <br>
+                <h2 id="title">Introdução</h2>
+                <br>
+                <p id="b2">Sem dedicatória,</p>
+                <br>
+                <p>
+                    <p>De poucas coisas me lembro, não apenas de quando era pequena, mas em geral. O que posso dizer
+                        acerca
+                        de mim é que, por exemplo, já não uso uma agenda pessoal graças ao Facebook, e já não oiço tanto
+                        música como antes, porque o YouTube e o Chrome não abrem ao mesmo tempo no telemóvel. Um dia,
+                        talvez, consiga resolver esse problema.</p>
+                    <p>Hoje em dia, vejo bem, já há alguns anos estou a usar óculos, no entanto, raramente leio livros
+                        em
+                        papel. Quando era pequena, não usava óculos, provavelmente via muito mal, e lia muitos livros ou
+                        muitas vezes os mesmos livros, e nessa altura também via pouca televisão. É engraçado, porque
+                        não
+                        lembro de muitos lugares onde fui e estive, mas lembro de alguns programas que vi na televisão.
+                        Vê-se logo que o turismo não é para mim, de paisagens lembro muito pouco.</p>
+                    <p>Sei que gosto de línguas desde pequena, quando lia as traduções para outros idiomas dos potes de
+                        manteiga e outros produtos do supermercado. Era fascinante cortar e colar papel, e pelos vistos,
+                        desde sempre tive muita sorte, porque se via mal, nunca cortei um dedo. Em relação à sorte,
+                        herdei-a
+                        da minha avó, com quem vivi antes de vir para Portugal. O país dos da sopa de cenoura e das
+                        moelas,
+                        pois de comida, eu lembro de muita coisa. Lembro que, no Porto, onde vivi, havia muitos pombos,
+                        e
+                        ainda há.</p>
+                    <p>Sim, por falar em pombos, quando era pequena, era menos seletiva em relação a animais de
+                        companhia,
+                        eu acreditava, e ainda acredito, que um carneiro é uma boa escolha, desde que não seja para um
+                        apartamento. Os animais me dão muita alegria, mesmo aqueles que roem livros, comem cabelos,
+                        rasgam a
+                        roupa, e limpam sapatos. Os animais reconhecem a importância de ter uma profissão, mesmo se não
+                        existir a reencarnação.</p>
+                    <p>Durante a minha infância pouco contacto tive com a tecnologia. Por isso, vou dar um salto no
+                        tempo,
+                        e passar para a adolescência, quando tive o meu primeiro computador. Vale pouco a pena dizer que
+                        me
+                        lembro do PowerPoint e do meu primeiro jogo interativo (um vírus), que era em meados de 1999.
+                        Desde
+                        essa altura, em que abandonei o meu primeiro computador, que entendi, que o primeiro amor era
+                        incondicional. A minha atenção, pouco se desviou disso, até surgirem os telemóveis, e pequenas
+                        caixinhas de música (mp4).</p>
+                    <p>Hoje em dia, os meus interesses continuam alinhados. Desde pequena aprendi Inglês, por isso,
+                        quando
+                        entrei pela primeira vez na Dark Web, e ironicamente, falei de pombos, pude passar por
+                        estrangeira,
+                        porque sempre falei Inglês. Não é muito difícil, já me confundiram muitas vezes com
+                        estrangeiros,
+                        sem dizer sequer uma palavra. Difícil mesmo, é ser invisível na Internet, mas há quem discorde,
+                        e
+                        continue a tentar alcançar esse super poder.</p>
+                    <p>O que sou eu na Internet? Seria uma pergunta com uma resposta interessante, pois até hoje algumas
+                        pessoas podem pensar que sou um robô (uma daquelas contas geradas por um algoritmo, e que sempre
+                        repetem as mesmas coisas). Esse nativo solitário da língua inglesa já existe há muito tempo, é
+                        quase
+                        como um alter ego, aquilo que queria ser, que fui, e que deixei de ser, como o Fernando Pessoa.
+                        Foram muitas histórias, e pessoas, que foram esquecidas, mais rápido do que o menu da semana
+                        passada.</p>
+                    <p>Dizem alguns, que a memória curta é uma qualidade importante. E isso é verdade, não é apenas uma
+                        pérola, que encontrei no fundo do mar, onde naufragou o The Pirate Bay. Eram bons tempos, quando
+                        tudo era mais fácil de encontrar, inclusive alguns livros. Há muitas coisas que posso dizer
+                        sobre a
+                        minha vida. Mas, primeiro vou falar dos lugares onde estive, na Internet, e fora dela, em
+                        lugares
+                        onde há tudo o que a vida tem de bom para oferecer, como por exemplo, teatro, música, e jogos
+                        tipo
+                        Arcade.</p>
+                    <p>Já estive em edifícios magníficos, perto de museus, cinemas (o de tipo tradicional, que deixou de
+                        existir), em centros culturais, e até mesmo pequenas bibliotecas. Muitos lugares tinham jardins
+                        bonitos, onde se podia praticar o Tai Chi, e lembro de pelo menos um onde havia um ginásio.
+                        Ficou na
+                        memória, porque não vou a ginásios! Em alguns lugares, havia e ainda há exposições de arte, e
+                        espaços para outras atividades. Para além do conforto, em todos esses lugares havia computadores
+                        e
+                        Internet.</p>
+                    <p>Eu sei que é um bocado precipitado concluir a minha autobiografia, mas já há pelo menos 11 anos
+                        que
+                        pouca coisa mudou. Para além de praticar exercício físico, mudar alguns hábitos alimentares, e
+                        passar mais tempo em casa, sinto que não só a minha vida, mas também o mundo, sofreu poucas
+                        alterações. Talvez, por haver poucas alterações no mundo, e por isso levantar questões reais, e
+                        não
+                        filosóficas, eu tenha desenvolvido aspirações mais ambiciosas, tanto para o presente como para o
+                        futuro. </p>
+                </p>
+            </article>
+        </article>
+    </div>
+    <div id="five" style="display: none;">
+        <article class="leads">
+            <h1 style="font-family:helvetica;">Pessoas que me inspiram.</h1>
+            <article class="one-lead">
+                <p>
+                    <img src="https://image.cnbcfm.com/api/v1/image/106139275-1568921126945facebookyt.jpg" id="l1">
+                    <h2>TechLead - Patrick Shyu</h2>
+                    <hr>
+                    <p>TechLead, também conhecido como Patrick Shyu, é um ex-líder técnico da Google e ex-engenheiro de
+                        software sênior da Facebook, que agora é um influenciador de tecnologia no YouTube.
+                    </p>
+                    <p>Por ser ex-líder técnico da Google, e ex-engenheiro de software
+                        sênior do Facebook, ele possui uma riqueza de conhecimento e experiência na indústria de
+                        tecnologia. Eu
+                        admiro sua capacidade de criar conteúdo envolvente e informativo no YouTube, onde ele
+                        compartilha suas ideias e experiências como engenheiro de software, fundador de startups e
+                        investidor.</p>
+                </p>
+            </article>
+            <article class="one-lead">
+                <p>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Black_cat_eyes.jpg/277px-Black_cat_eyes.jpg"
+                        id="l1">
+                    <h2>Unknown - Ian Amarille</h2>
+                    <hr>
+                    <p><br><br></p>
+                    <p><br><br></p>
+                </p>
+            </article>
+        </article>
+    </div>
+    <div class=" limpar">
+    </div>
+</body>
+
+</html>

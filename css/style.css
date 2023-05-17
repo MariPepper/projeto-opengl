@@ -1,0 +1,383 @@
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Bitstream Vera Serif Bold";
+    src: url("https://mdn.github.io/css-examples/web-fonts/VeraSeBd.ttf");
+}
+
+html {
+    height: 100vh;
+    width: 100vw;
+    font-size: 16px;
+    color: white;
+    text-shadow: goldenrod 1px;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: white;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+}
+
+/* Style for the side menu container */
+#side-menu {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 200px;
+    background-color: #1D1932;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+    display: none;
+}
+
+span {
+    margin:-20px;
+    position: relative;
+}
+
+canvas {
+    display: block;
+    /* prevents scrollbar */
+    width: 100vw;
+    height: 100vh;
+}
+
+/* Style for the menu items */
+#side-menu li {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+    font-size: 20px;
+}
+
+.main-nav {
+    transition: margin-left 0.5s ease-out;
+}
+
+.side-menu-open .main-nav {
+    margin-left: 90px;
+}
+
+.container {
+    max-width: 1280px;
+    overflow: hidden;
+    width: 100%;
+}
+
+nav,
+.container {
+    height: 60px;
+    width: 100%;
+    padding: .8rem;
+    background: #1D1932;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+nav {
+    justify-content: center;
+}
+
+nav img {
+    margin-inline: .5rem;
+    width: 30px;
+    height: 30px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    margin-inline: .8rem;
+}
+
+.menu>img {
+    width: 30px;
+    height: 30px;
+    margin-inline: .5rem;
+}
+
+.search-ac {
+    display: flex;
+    align-items: center;
+    margin-inline: .8rem;
+}
+
+.searchbar {
+    background-color: #ffffff34;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: .2rem .5rem;
+}
+
+.searchbar>img {
+    height: 24px;
+    width: 24px;
+    margin-right: .5rem;
+}
+
+.searchbar>input {
+    height: 28px;
+    width: 200px;
+    outline: none;
+    color: white;
+    background: transparent;
+    border: none;
+}
+
+.noti-mode {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-inline: .8rem;
+}
+
+.noti-mode>img {
+    height: 30px;
+    width: 30px;
+    margin-inline: .5rem;
+}
+
+.limpar {
+    clear: both;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+input[type="range"] {
+    width: 120px;
+    margin: auto;
+    padding: auto;
+}
+
+select {
+    width: 140px;
+    height: 20px;
+    margin: auto;
+    padding: auto;
+    border-radius: 0%;
+}
+
+#one, #three, #four, #five {
+    color: black;
+    text-align: justify;
+}
+
+.steps {
+    margin: 0;
+    padding: 0.3rem;
+    background-color: #eee;
+    font: 1rem 'Fira Sans', sans-serif;
+    transition: margin-left 0.5s ease-out;
+}
+
+.side-menu-open .steps .one-step {
+    margin-left: 200px;
+}
+
+.one-step {
+    margin: 0.5rem;
+    padding: 2.5rem;
+    font-size: 1.2rem;
+}
+
+.steps>h1 {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    margin-right: 2.6rem;
+    font-size: 1.2rem;
+    padding-right: 0.5rem;
+    text-overflow: clip;
+}
+
+.one-step {
+    background: right/contain content-box border-box no-repeat white;
+    transition: margin-left 0.5s ease-out;
+}
+
+.one-step>h2,
+.one-step>p {
+    margin: 0.2rem;
+    font-size: 1rem;
+    padding-bottom: 4px;
+}
+
+.bio {
+    margin: 0;
+    padding: 0.3rem;
+    background-color: #eee;
+    font: 1rem 'Fira Sans', sans-serif;
+    transition: margin-left 0.5s ease-out;
+}
+
+.the-bio {
+    background: right/contain content-box border-box no-repeat white;
+    transition: margin-left 0.5s ease-out;
+}
+
+.side-menu-open .bio .the-bio {
+    margin-left: 200px;
+}
+
+.the-bio {
+    margin: 0.5rem;
+    padding: 2.5rem;
+    font-size: 1.2rem;
+}
+
+.the-bio>p {
+    margin: 0.2rem;
+    font-size: 1rem;
+    padding-bottom: 4px;
+}
+
+.bio>h1 {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    margin-right: 2.6rem;
+    font-size: 1.2rem;
+    padding-right: 0.5rem;
+    text-overflow: clip;
+}
+
+.the-bio>h2 {
+    margin: 0.2rem;
+    padding-bottom: 0.25rem;
+    font-size: 1.2rem;
+    text-align: left;
+    font-family: 'MyWebFont', 'Bitstream Vera Serif Bold', serif;
+}
+
+.leads {
+    margin: 0;
+    padding: 0.3rem;
+    background-color: #eee;
+    font: 1rem 'Fira Sans', sans-serif;
+    transition: margin-left 0.5s ease-out;
+}
+
+.one-lead {
+    background: right/contain content-box border-box no-repeat white;
+    transition: margin-left 0.5s ease-out;
+}
+
+.side-menu-open .leads .one-lead {
+    margin-left: 200px;
+}
+
+.one-lead {
+    margin: 0.5rem;
+    padding: 2.5rem;
+    font-size: 1.2rem;
+}
+
+.one-lead>p {
+    margin: 0.2rem;
+    font-size: 1rem;
+    padding-bottom: 4px;
+}
+
+.leads>h1 {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    margin-right: 2.6rem;
+    font-size: 1.2rem;
+    padding-right: 0.5rem;
+    text-overflow: clip;
+}
+
+.one-lead>h2 {
+    margin: 0.2rem;
+    margin-top: 0.5rem;
+    padding-bottom: 0.25rem;
+    font-size: 1rem;
+    text-align: left;
+}
+
+.intro {
+    margin: 0;
+    padding: 0.3rem;
+    background-color: #eee;
+    font: 1rem 'Fira Sans', sans-serif;
+    transition: margin-left 0.5s ease-out;
+}
+
+.side-menu-open .intro .the-intro {
+    margin-left: 200px;
+}
+
+.the-intro {
+    margin: 0.5rem;
+    padding: 2.5rem;
+    font-size: 1.2rem;
+}
+
+.intro>h1 {
+    margin: 0.5rem;
+    padding: 0.3rem;
+    margin-right: 2.6rem;
+    font-size: 1.2rem;
+    padding-right: 0.5rem;
+    text-overflow: clip;
+}
+
+.the-intro {
+    background: right/contain content-box border-box no-repeat white;
+    transition: margin-left 0.5s ease-out;
+}
+
+.the-intro>h2,
+.the-intro>p {
+    margin: 0.2rem;
+    font-size: 1rem;
+    padding-bottom: 4px;
+}
+
+#l1,
+#l2,
+#l3,
+#l4 {
+    width: 180px;
+    height: 140px;
+    float: left;
+    margin: 0rem 2.5rem 2.5rem 0.2rem;
+}
+
+p {
+    text-justify: inter-word;
+}
+
+#b1,
+#b2 {
+    font-family: 'MyWebFont';
+}
+
+h1 {
+    color: black;
+    text-align: right;
+    margin-right: 3.4rem;
+    text-overflow: clip;
+}
+
+.disable {
+    text-decoration: none;
+}
+
+.highlighted {
+    background-color: yellow;
+}
